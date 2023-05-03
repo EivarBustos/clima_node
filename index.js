@@ -16,7 +16,10 @@ const main = async()=>{
      switch(opt){
         case 1:
             //Mostrar mensaje para escribir 
-            const lugar = await leerInput('Ciudad :');
+            const termino = await leerInput('Ciudad :');
+            const lugares = await busquedas.ciudad(termino);
+            console.log(lugares)
+
             //await porque se va a trabajar cn una Promesa
             await busquedas.ciudad(lugar);
             // Buscar los lugares

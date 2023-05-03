@@ -27,8 +27,17 @@ export class Busquedas{
     });
        const respuesta= await instance.get();
        //para ver que viene ahi
-       console.log(respuesta.data)
-        return[]; //retorna los lugares que coincidan 
+       
+       return respuesta.data.features.map(lugar =>({
+        id: lugar.id,
+        nombre: lugar.place_name,
+        //primera posicion 
+        lng: lugar.center[0],
+        //segundaposicion 
+        lat: lugar.center[1],
+
+       }));
+        
 
         }catch(error){
             console.log('No se encontro informacion, verifique :)')
