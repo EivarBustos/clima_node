@@ -68,13 +68,13 @@ export const leerInput = async(message)=>{
 
 }
 
-export const listadoTareasBorrar = async(tareas =[])=> {
+export const listadoLugares = async(lugares =[])=> {
     //retorna un arreglo transformando los hijos 
-    const choices = tareas.map((tarea, i) =>{
+    const choices = lugares.map((lugar, i) =>{
     const index =`${i + 1}.`.green;
         return{
-            value: tarea.id,
-            name: `${index} ${tarea.desc}`
+            value: lugar.id,
+            name: `${index} ${lugar.nombre}`
 
         }
     });
@@ -87,7 +87,7 @@ export const listadoTareasBorrar = async(tareas =[])=> {
         {
             type: 'list',
             name:'id',
-            message: '¿Qué tarea desea borrar?',
+            message: 'Seleccione el lugar : ',
             choices
         }
     ]

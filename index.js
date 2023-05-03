@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config({path:'./token.env'});
 
-import { inquirerMenu, leerInput, pausa } from "./helper/inquirer.js"
+import { inquirerMenu, leerInput, listadoLugares, pausa } from "./helper/inquirer.js"
 import { Busquedas } from "./models/busqueda.js";
 
 
@@ -17,18 +17,21 @@ const main = async()=>{
         case 1:
             //Mostrar mensaje para escribir 
             const termino = await leerInput('Ciudad :');
-            const lugares = await busquedas.ciudad(termino);
-            console.log(lugares)
-
-            //await porque se va a trabajar cn una Promesa
-            await busquedas.ciudad(lugar);
             // Buscar los lugares
+            const lugares = await busquedas.ciudad(termino);
             // Seleccionar el lugar 
+            const seleccionado = await listadoLugares(lugares);
+            // Mostrar el lugar, latitud etc
+            const lugarSel = lugares.find(l => l.id === seleccionado);
+            //await para que espere 
+            await busquedas.ciudad(lugares);
+            
+            
             // Mostrar los resultados
             console.log(`\n Informacion de la ciudad\n`.green);
-            console.log('Ciudad :');
-            console.log('Latitud :');
-            console.log('Longitud :');
+            console.log(`Ciudad : ${lugarSel.nombre}`);
+            console.log('Latitud :', lugarSel.lat);
+            console.log('Longitud :', lugarSel.lng);
             console.log('Temperatura :');
             console.log('Temperatura Minima :')
             console.log('Temperatura Maxima:')
